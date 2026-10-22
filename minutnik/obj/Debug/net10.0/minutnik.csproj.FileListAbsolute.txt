@@ -89,3 +89,4 @@ C:\minutnik\minutnik\obj\Debug\net10.0\refint\minutnik.dll
 C:\minutnik\minutnik\obj\Debug\net10.0\minutnik.pdb
 C:\minutnik\minutnik\obj\Debug\net10.0\minutnik.genruntimeconfig.cache
 C:\minutnik\minutnik\obj\Debug\net10.0\ref\minutnik.dll
+C:\minutnik\minutnik\obj\Debug\net10.0\minutnik.sourcelink.json
