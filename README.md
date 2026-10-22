@@ -1,5 +1,6 @@
 1. najtrudniejsze było zlokalizowanie tekstu, gdyby nie skrót ctrl f, myślę, że nie byłabym w stanie niczego znaleźć. blok zajął mi ok. 20 minut. Niestety popełniłam błąd w zadaniu, ponieważ wpisałam cały prompt w jednej wiadomości przez co nie udało mi się więc udokumentować kolejnych podejść osobnymi commitami.
 2. dodałam listę przechowującą historię ukończonych cykli oraz wpisy zawierające godzinę i numer ukończonego cyklu. Logikę zapisu umieściłam w MainWindow.axaml.cs, w metodzie HandleSessionCompletion().
+
 Data wykonania: 22.10.2026
 Po wpisaniu 25.5: 25 minut
 Po wpisaniu 25,5: 26 minut
