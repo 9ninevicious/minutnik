@@ -133,11 +133,11 @@
                                            FontWeight="Bold"
                                            Foreground="#38BDF8"
                                            HorizontalAlignment="Center"/>
-                                <ListBox x:Name="HistoryList"/>
                                 <TextBlock Text="ukończone"
                                            FontSize="10"
                                            Foreground="#64748B"
                                            HorizontalAlignment="Center" />
+                                <ListBox x:Name="HistoryList" />
                             </StackPanel>
                         </Border>
                     </Grid>
