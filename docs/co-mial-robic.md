@@ -51,3 +51,33 @@ Specyfikacja spisana po fakcie (inżynieria wsteczna) z działającej aplikacji 
 3. **Powiadomienia dźwiękowe i systemowe**: czy aplikacja powinna wydawać głośny sygnał dźwiękowy lub wysyłać powiadomienie pulpitu po zakończeniu odliczania, aby użytkownik nie musiał stale kontrolować okna wzrokiem.
 4. **Wpływ zmiany długości na bieżącą sesję**: czy zmiana wartości w polach `NumericUpDown` podczas aktywnego odliczania powinna dynamicznie korygować pozostały czas bieżącej sesji, czy kontrolki te powinny być blokowane do momentu zakończenia lub zresetowania timera.
 5. **Długie przerwy (Long Break)**: czy aplikacja powinna oferować wydłużoną przerwę (np. 15–30 minut) po ukończeniu każdych czterech pełnych cykli roboczych.
+
+
+---
+
+## Porównanie z siedmioma zasadami z lekcji
+
+Po sporządzeniu powyższej specyfikacji z pamięci, skonfrontowano ją z siedmioma zasadami działania minutnika z lekcji:
+
+1. **Odmierzanie 25 minut pracy** — odtworzona (domyślny czas odliczania sesji skupienia).
+2. **Odmierzanie 5 minut przerwy** — odtworzona (domyślny czas trwania sesji regeneracji).
+3. **Liczenie skończonych cykli** — odtworzona (zliczanie ukończonych cykli po zakończeniu przerwy).
+4. **Obie długości mają być do zmiany w oknie** — odtworzona (kontrolki `NumericUpDown` dla pracy i przerwy).
+5. **Jeden przycisk start/pauza, drugi reset** — odtworzona (przycisk przełączający Start/Pauza oraz osobny Reset).
+6. **Czas widoczny jako mm:ss, licznik cykli widoczny obok** — odtworzona (duży wyświetlacz `00:00` oraz sąsiadujący kafelek z cyframi cykli).
+7. **Po skończonej pracy przerwa ma ruszyć sama** — odtworzona (automatyczne przejście z trybu pracy do przerwy bez zatrzymywania zegara).
+
+### Ile udało się odtworzyć
+Z pamięci udało się odtworzyć **wszystkie 7 z 7 zasad (100%)**. Każda z tych zasad wynika bezpośrednio z układu kontrolek graficznych oraz obserwowalnego zachowania działającej aplikacji.
+
+### Co program robi w sytuacji, o której żadna z nich nie mówiła
+Żadna z siedmiu zasad z lekcji nie precyzowała, **co ma się stać z licznikiem cykli, kiedy naciśniesz reset w środku przerwy** (ani ogólnie: jaki jest zakres działania przycisku Reset względem licznika cykli).
+
+W kodzie programu (`minutnik/MainWindow.axaml.cs`, metoda `OnResetClick`) w tej sytuacji program:
+- zatrzymuje bieżący timer (`_timer.Stop()`),
+- bezwarunkowo przełącza stan sesji na pracę (`_isWorkSession = true`),
+- ustawia licznik czasu na pełny czas pracy (`_remainingSeconds = _workDurationMinutes * 60`),
+- **całkowicie zeruje licznik ukończonych cykli do zera (`_completedCycles = 0`)**,
+- jednocześnie pozostawia dotychczasową listę historii (`_history` / `HistoryList`) bez zmian.
+
+Zasady z pokazu mówiły jedynie: *„Jeden przycisk start/pauza, drugi reset”*, nie definiując, czy reset ma dotyczyć jedynie bieżącej fazy odliczania, czy kasować cały uzyskany bilans cykli roboczych.
